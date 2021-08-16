@@ -1,0 +1,39 @@
+{
+  "name": "win_window",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oya-Tomo",
+  "license": "MIT",
+  "build": {
+    "appId": "net.Windows.app",
+    "files": [
+        "package.json",
+        "main.js",
+        "preload.js",
+        "renderer.js",
+        "main.html",
+        "main.css",
+        "button_img/mini.png",
+        "button_img/max.png",
+        "button_img/unmax.png"
+    ],
+    "win": {
+        "target": "nsis",
+        "icon": "Win_icon.png"
+    },
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^13.1.9"
+  },
+  "dependencies": {
+    "electron-store": "^8.0.0"
+  }
+}
