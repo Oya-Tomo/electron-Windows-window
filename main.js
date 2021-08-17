@@ -1,79 +1,69 @@
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const ipcMain = electron.ipcMain;
-const Store = require('electron-store');
-
+const { app, BrowserWindow, ipcMain} = require('electron');
+const Store = require("electron-store");
 
 let mainWindow = null;
 const store = new Store();
 
+widthKey = 'window-width';
+heightKey = 'window-height';
+isMaxKey = 'window-isMax';
 
-app.on('window-all-closed', function() {
+app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
 });
 
-app.on('ready', function() {
-    var width = store.get('width') || 800;
-    var height = store.get('height') || 500;
-    var x = store.get('x') || 300;
-    var y = store.get('y') || 200;
-    var isMax = store.get('isMax') || false;
-    
+app.on('ready', () => {
+    var width = store.get(widthKey) || 800;
+    var height = store.get(heightKey) || 500;
+    var isMax = store.get(isMaxKey) || false;
+
     mainWindow = new BrowserWindow({
         width: width,
         height: height,
-        x: x,
-        y: y,
         frame: false,
         webPreferences: {
-            nodeIntegration: false,
+            nodeIntegration: false, 
             contextIsolation: true,
             preload: __dirname + '/preload.js'
         }
     });
 
-    mainWindow.loadURL('file://' + __dirname + '/main.html');
+    mainWindow.loadURL("file://" + __dirname + "/main.html");
 
     if (isMax) {
         mainWindow.maximize();
     }
 
-    mainWindow.on('resize', function () {
-        if (mainWindow.isMaximized()) {
-            store.set("isMax", true);
+    mainWindow.on('resize', () => {
+        if (!mainWindow.isMaximized()) {
+            store.set(widthKey, mainWindow.getSize()[0]);
+            store.set(heightKey, mainWindow.getSize()[1]);
+            store.set(isMaxKey, false);
         } else {
-            store.set("isMax", false);
-            const size = mainWindow.getSize();
-            store.set("width", size[0]);
-            store.set("height", size[1]);
+            store.set(isMaxKey, true);
         }
     });
 
-    mainWindow.on('move', function () {
-        if (!mainWindow.isMaximized()) {
-            const pos = mainWindow.getPosition();
-            store.set("x", pos[0]);
-            store.set("y", pos[1]);
-        }
-    })
+    mainWindow.on('close', () => {
+        mainWindow = null;
+    });
 });
 
 ipcMain.on('quit', (e, arg) => {
     app.quit();
 });
 
-ipcMain.on('mini', (e, arg) => {
-    mainWindow.minimize();
-});
-
 ipcMain.on('resize', (e, arg) => {
     mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
 });
 
-ipcMain.on('getWindowSize', (e, arg) => {
+ipcMain.on('mini', (e, arg) => {
+    mainWindow.minimize();
+});
+
+ipcMain.on('get_window_size', (e, arg) => {
     const isMax = mainWindow.isMaximized();
-    e.sender.send('getWindowSize-reply', isMax);
+    e.sender.send('get_window_size_reply', isMax);
 });
