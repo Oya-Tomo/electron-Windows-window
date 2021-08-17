@@ -1,29 +1,27 @@
-const button_resize = document.getElementById("button_resize");
+const button_resize = document.getElementById('resize');
 
 function quit() {
-    window.api.send_quit();
-}
-
-function mini() {
-    window.api.send_mini();
+    window.api.send('quit', true);
 }
 
 function resize() {
-    window.api.send_resize();
+    window.api.send('resize', true);
+}
+
+function mini() {
+    window.api.send('mini', true);
 }
 
 window.onresize = () => {
-    window.api.getWindowSize();
+    window.api.send('get_window_size', true);
 }
 
-window.api.on('getWindowSize-reply', (e, isMax) => {
+window.api.on('get_window_size_reply', (e, isMax) => {
     if (isMax) {
-        button_resize.classList.add('unMax');
-        button_resize.classList.remove('max');
+        button_resize.src = "button_img/unmax.png";
     } else {
-        button_resize.classList.add('max');
-        button_resize.classList.remove('unMax');
+        button_resize.src = "button_img/max.png";
     }
 });
 
-window.api.getWindowSize();
+window.api.send('get_window_size', true);
