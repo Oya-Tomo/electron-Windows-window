@@ -1,20 +1,9 @@
-const electron = require('electron');
-const ipcRenderer = electron.ipcRenderer;
-const contextBridge = electron.contextBridge;
+const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld(
     "api", {
-        send_quit: () => {
-            ipcRenderer.send('quit', true);
-        },
-        send_resize: () => {
-            ipcRenderer.send('resize', true);
-        },
-        send_mini: () => {
-            ipcRenderer.send('mini', true);
-        },
-        getWindowSize: () => {
-            ipcRenderer.send('getWindowSize', true);
+        send: (channel, arg) => {
+            ipcRenderer.send(channel, arg);
         },
         on: (channel, callback) => {
             ipcRenderer.on(channel, (e, arg) => callback(e, arg));
