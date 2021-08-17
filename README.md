@@ -32,4 +32,4 @@
   - electron-builder 22-11-7
 
 ## ライセンス　～License～
-　MIT license （原文・・・　https://opensource.org/licenses/mit-license.php）
+　MIT license （原文・・・https://opensource.org/licenses/mit-license.php　）
