@@ -25,3 +25,11 @@
  
 ## 苦労したポイント
 　苦労したポイントは、ipcMain/ipcRendererの通信．．．ではなく、環境構築です。もともとは「electron .」で動かしていましたが、ここで呼び出していたelectronは実はグローバル環境のelectronでした。しかも、そのバージョンが古いせいでelectron-storeが使えませんでした。そしてアップデートしようとすると今度はそこでエラーを吐き大変でした。なんとかアップデートしelecctron-storeをrequireした時のエラーも消すことができました。よくやった、俺．．．
+
+## 使用したパッケージ　～Used Package～
+  - electron 13-1-9
+  - electron-store 8-0-0
+  - electron-builder 22-11-7
+
+## ライセンス　～License～
+　MIT license （原文・・・　https://opensource.org/licenses/mit-license.php）
