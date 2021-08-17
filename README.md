@@ -2,7 +2,7 @@
 # electronのアプリのタイトルバーの色を変える。
 
 ## DEMO Image
-https://github.com/Oya-Tomo/electron-Windows-window/issues/1#issue-972402515
+<img width="960" alt="demo image" src="https://user-images.githubusercontent.com/82521012/129685956-a4f94306-53ab-4461-8fc6-8041df9edc20.png">
 
 ## electron
 　electronはアプリの中にブラウザー(chromium)が埋め込まれており、HTML・CSS・JSでデスクトップアプリを手軽にデザインできるフレームワークである。有名なコードエディターVisual Studio Codeもこのフレームワークによって開発されている。<br>
