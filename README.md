@@ -33,4 +33,4 @@
 
 ## ライセンス　～License～
 　MIT license<br>
- 原文・・・https://opensource.org/licenses/mit-license.php
+  原文・・・https://opensource.org/licenses/mit-license.php
