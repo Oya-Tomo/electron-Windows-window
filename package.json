@@ -19,7 +19,8 @@
         "main.css",
         "button_img/mini.png",
         "button_img/max.png",
-        "button_img/unmax.png"
+        "button_img/unmax.png",
+        "button_img/quit.png"
     ],
     "win": {
         "target": "nsis",
